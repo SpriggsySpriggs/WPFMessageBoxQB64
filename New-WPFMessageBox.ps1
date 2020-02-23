@@ -403,6 +403,7 @@ Function New-WPFMessageBox {
     {
         $Window.Add_Loaded({
             $This.Activate()
+            $window.topmost=$true
             Invoke-Command $OnLoaded
         })
     }
@@ -410,6 +411,7 @@ Function New-WPFMessageBox {
     {
         $Window.Add_Loaded({
             $This.Activate()
+            $window.topmost=$false
         })
     }
     
@@ -505,6 +507,7 @@ CustomButtons = $args[20],$args[21],$args[22]
 }
  
 New-WPFMessageBox @Params
+
 switch ($WPFMessageBoxOutput){
 "OK" {exit 1}
 "Cancel" {exit 2}
