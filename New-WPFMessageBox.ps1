@@ -481,9 +481,10 @@ Function New-WPFMessageBox {
 
     }
 }
+$CRLF = "&#xa;"
 $Params = @{
-Content = $args[0]
-Title = $args[1]
+Content = $args[0].ToString().Replace("\n",$CRLF)
+Title = $args[1].ToString().Replace("\n",$CRLF)
 ButtonType = $args[2]
 ContentFontSize = $args[3]
 TitleFontSize = $args[4]
@@ -491,24 +492,23 @@ BorderThickness = $args[5]
 CornerRadius = $args[6]
 ShadowDepth = $args[7]
 BlurRadius = $args[8]
-Timeout = $args[9]
+#Timeout = $args[9]
 #OnLoaded = $args[10]
 #OnClosed = $args[11]
-ContentBackground = $args[10]
-FontFamily = $args[11]
-TitleFontWeight = $args[12]
-ContentFontWeight = $args[13]
-TitleTextForeground = $args[14]
-ContentTextForeground = $args[15]
-BorderBrush = $args[16]
-TitleBackground = $args[17]
-ButtonTextForeground = $args[18]
-Sound = $args[19]
-CustomButtons = $args[20],$args[21],$args[22]
+ContentBackground = $args[9]
+FontFamily = $args[10]
+TitleFontWeight = $args[11]
+ContentFontWeight = $args[12]
+TitleTextForeground = $args[13]
+ContentTextForeground = $args[14]
+BorderBrush = $args[15]
+TitleBackground = $args[16]
+ButtonTextForeground = $args[17]
+Sound = $args[18]
+CustomButtons = $args[19],$args[20],$args[21]
 }
- 
-New-WPFMessageBox @Params
 
+New-WPFMessageBox @Params
 switch ($WPFMessageBoxOutput){
 "OK" {exit 1}
 "Cancel" {exit 2}
