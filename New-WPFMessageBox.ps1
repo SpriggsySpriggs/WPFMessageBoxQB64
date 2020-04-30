@@ -505,10 +505,11 @@ BorderBrush = $args[15]
 TitleBackground = $args[16]
 ButtonTextForeground = $args[17]
 Sound = $args[18]
-CustomButtons = $args[19],$args[20],$args[21]
+#CustomButtons = $args[19],$args[20],$args[21]
 }
 
 New-WPFMessageBox @Params
+#Write-Output $WPFMessageBoxOutput
 switch ($WPFMessageBoxOutput){
 "OK" {exit 1}
 "Cancel" {exit 2}
@@ -519,5 +520,5 @@ switch ($WPFMessageBoxOutput){
 "No" {exit 7}
 "TryAgain" {exit 8}
 "Continue" {exit 9}
-"None" {exit 10}
+#"None" {exit 10}
 }

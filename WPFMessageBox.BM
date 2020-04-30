@@ -22,7 +22,7 @@ FUNCTION WPFMessageBox (Params AS Params)
     END IF
 
     IF Params.ButtonType <> "" AND INSTR(Params.ButtonType, "\" + CHR$(34)) = 0 THEN
-        IF Params.ButtonType <> Button.OK AND Params.ButtonType <> Button.OK_Cancel AND Params.ButtonType <> Button.Abort_Retry_Ignore AND Params.ButtonType <> Button.Yes_No_Cancel AND Params.ButtonType <> Button.Yes_No AND Params.ButtonType <> Button.Retry_Cancel AND Params.ButtonType <> Button.Cancel_TryAgain_Continue AND Params.ButtonType <> Button.None THEN
+        IF Params.ButtonType <> Button.OK AND Params.ButtonType <> Button.OK_Cancel AND Params.ButtonType <> Button.Abort_Retry_Ignore AND Params.ButtonType <> Button.Yes_No_Cancel AND Params.ButtonType <> Button.Yes_No AND Params.ButtonType <> Button.Retry_Cancel AND Params.ButtonType <> Button.Cancel_TryAgain_Continue THEN
             Params.ButtonType = Button.OK
             Params.ButtonType = "\" + CHR$(34) + Params.ButtonType + "\" + CHR$(34)
             SHELL$ = SHELL$ + " " + Params.ButtonType
@@ -180,20 +180,20 @@ FUNCTION WPFMessageBox (Params AS Params)
         SHELL$ = SHELL$ + " " + Params.Sound
     END IF
 
-    IF Params.CustomButton1 <> "" AND INSTR(Params.CustomButton1, "\" + CHR$(34)) = 0 THEN
-        Params.CustomButton1 = "\" + CHR$(34) + Params.CustomButton1 + "\" + CHR$(34) '$args[20]
-        SHELL$ = SHELL$ + " " + Params.CustomButton1
-    END IF
+    'IF Params.CustomButton1 <> "" AND INSTR(Params.CustomButton1, "\" + CHR$(34)) = 0 THEN
+    '    Params.CustomButton1 = "\" + CHR$(34) + Params.CustomButton1 + "\" + CHR$(34) '$args[20]
+    '    SHELL$ = SHELL$ + " " + Params.CustomButton1
+    'END IF
 
-    IF Params.CustomButton2 <> "" AND INSTR(Params.CustomButton2, "\" + CHR$(34)) = 0 THEN
-        Params.CustomButton2 = "\" + CHR$(34) + Params.CustomButton2 + "\" + CHR$(34) '$args[21]
-        SHELL$ = SHELL$ + " " + Params.CustomButton2
-    END IF
+    'IF Params.CustomButton2 <> "" AND INSTR(Params.CustomButton2, "\" + CHR$(34)) = 0 THEN
+    '    Params.CustomButton2 = "\" + CHR$(34) + Params.CustomButton2 + "\" + CHR$(34) '$args[21]
+    '    SHELL$ = SHELL$ + " " + Params.CustomButton2
+    'END IF
 
-    IF Params.CustomButton3 <> "" AND INSTR(Params.CustomButton3, "\" + CHR$(34)) = 0 THEN
-        Params.CustomButton3 = "\" + CHR$(34) + Params.CustomButton3 + "\" + CHR$(34) '$args[22]
-        SHELL$ = SHELL$ + " " + Params.CustomButton3
-    END IF
+    'IF Params.CustomButton3 <> "" AND INSTR(Params.CustomButton3, "\" + CHR$(34)) = 0 THEN
+    '    Params.CustomButton3 = "\" + CHR$(34) + Params.CustomButton3 + "\" + CHR$(34) '$args[22]
+    '    SHELL$ = SHELL$ + " " + Params.CustomButton3
+    'END IF
 
     SHELL$ = SHELL$ + ";exit $LASTEXITCODE" + CHR$(34)
     DIM a

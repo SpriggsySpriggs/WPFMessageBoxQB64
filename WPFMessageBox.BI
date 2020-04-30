@@ -4,15 +4,15 @@
 TYPE Params
     Content AS STRING 'mandatory
     Title AS STRING 'not mandatory
-    ButtonType AS STRING 'defaults to "OK"
-    'Valid ButtonType values are "OK", "OK-Cancel", "Abort-Retry-Ignore", "Yes-No-Cancel", "Yes-No", "Retry-Cancel", "Cancel-TryAgain-Continue", "None" ("None" is used when defining custom buttons. This QB64 program allows for 3)
-    ContentFontSize AS INTEGER 'defaults to "14"
-    TitleFontSize AS INTEGER 'defaults to "14"
-    BorderThickness AS INTEGER 'defaults to "0"
-    CornerRadius AS INTEGER 'defaults to "8"
-    ShadowDepth AS INTEGER 'defaults to "3"
-    BlurRadius AS INTEGER 'defaults to "20"
-    'WindowHost AS STRING
+    ButtonType AS STRING 'defaults to Button.OK
+    'Valid ButtonType values are listed in Button
+    ContentFontSize AS INTEGER 'defaults to 14
+    TitleFontSize AS INTEGER 'defaults to 14
+    BorderThickness AS INTEGER 'defaults to 0
+    CornerRadius AS INTEGER 'defaults to 8
+    ShadowDepth AS INTEGER 'defaults to 3
+    BlurRadius AS INTEGER 'defaults to 20
+    'WindowHost AS LONG
     'Timeout AS STRING 'not mandatory
     'OnLoaded AS STRING 'not mandatory
     'OnClosed AS STRING 'not mandatory
@@ -26,11 +26,11 @@ TYPE Params
     TitleBackground AS STRING 'not mandatory, defaults to "White"
     ButtonTextForeground AS STRING 'not mandatory, defaults to "Black"
     'Valid colors are listed at https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.colors?view=netframework-4.8
-    Sound AS STRING 'not mandatory, defaults to "Windows Notify System Generic"
-    'Valid sounds are "Windows Background","Windows Balloon","Windows Battery Critical","Windows Battery Low","Windows Critical Stop","Windows Default","Windows Ding","Windows Error","Windows Exclamation","Windows Feed Discovered","Windows Foreground","Windows Hardware Fail","Windows Hardware Insert","Windows Hardware Remove","Windows Information Bar","Windows Logoff Sound","Windows Logon","Windows Menu Command","Windows Message Nudge","Windows Minimize","Windows Navigation Start","Windows Notify Calendar","Windows Notify Email","Windows Notify Messaging","Windows Notify System Generic","Windows Notify","Windows Pop-up Blocked","Windows Print complete","Windows Proximity Connection","Windows Proximity Notification","Windows Recycle","Windows Restore","Windows Ringin","Windows Ringout","Windows Shutdown","Windows Startup","Windows Unlock","Windows User Account Control"
-    CustomButton1 AS STRING 'not mandatory, only used if ButtonType = "None"
-    CustomButton2 AS STRING 'not mandatory, only used if ButtonType = "None"
-    CustomButton3 AS STRING 'not mandatory, only used if ButtonType = "None"
+    Sound AS STRING 'not mandatory, defaults to Alert.NotifySystemGeneric
+    'Valid sounds are listed in Alert
+    'CustomButton1 AS STRING 'not mandatory, only used if ButtonType = Button.None
+    'CustomButton2 AS STRING 'not mandatory, only used if ButtonType = Button.None
+    'CustomButton3 AS STRING 'not mandatory, only used if ButtonType = Button.None
 END TYPE
 DIM SHARED Params AS Params
 TYPE ButtonClicked
@@ -62,7 +62,7 @@ TYPE ButtonType
     Yes_No AS STRING
     Retry_Cancel AS STRING
     Cancel_TryAgain_Continue AS STRING
-    None AS STRING
+    'None AS STRING
 END TYPE
 DIM SHARED Button AS ButtonType
 Button.OK = "OK"
@@ -72,7 +72,7 @@ Button.Yes_No_Cancel = "Yes-No-Cancel"
 Button.Yes_No = "Yes-No"
 Button.Retry_Cancel = "Retry-Cancel"
 Button.Cancel_TryAgain_Continue = "Cancel-TryAgain-Continue"
-Button.None = "None"
+'Button.None = "None"
 TYPE Color
     AliceBlue AS STRING
     AntiqueWhite AS STRING
