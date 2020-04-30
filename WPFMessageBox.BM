@@ -1,5 +1,7 @@
 FUNCTION WPFMessageBox (Params AS Params)
-    SHELL$ = "PowerShell -Command " + CHR$(34) + "&'" + _STARTDIR$ + "\New-WPFMessageBox.ps1'"
+    DIM SHELL$
+    SHELL$ = "PowerShell -ExecutionPolicy Bypass -Command " + CHR$(34) + "&'" + _STARTDIR$ + "\New-WPFMessageBox.ps1'"
+    'SHELL$ = "PowerShell -Command " + CHR$(34) + "&'" + _STARTDIR$ + "\New-WPFMessageBox.ps1'"
     '==============================================================================
     IF Params.Content <> "" AND INSTR(Params.Content, "\" + CHR$(34)) = 0 THEN
         Params.Content = "\" + CHR$(34) + Params.Content + "\" + CHR$(34) '$args[0]
@@ -14,14 +16,14 @@ FUNCTION WPFMessageBox (Params AS Params)
         Params.Title = "\" + CHR$(34) + Params.Title + "\" + CHR$(34) '$args[1]
         SHELL$ = SHELL$ + " " + Params.Title
     ELSE
-        Params.Title = TITLE$
+        Params.Title = _TITLE$
         Params.Title = "\" + CHR$(34) + Params.Title + "\" + CHR$(34) '$args[1]
         SHELL$ = SHELL$ + " " + Params.Title
     END IF
 
     IF Params.ButtonType <> "" AND INSTR(Params.ButtonType, "\" + CHR$(34)) = 0 THEN
-        IF Params.ButtonType <> "OK" AND Params.ButtonType <> "OK-Cancel" AND Params.ButtonType <> "Abort-Retry-Ignore" AND Params.ButtonType <> "Yes-No-Cancel" AND Params.ButtonType <> "Yes-No" AND Params.ButtonType <> "Retry-Cancel" AND Params.ButtonType <> "Cancel-TryAgain-Continue" AND Params.ButtonType <> "None" THEN
-            Params.ButtonType = "OK"
+        IF Params.ButtonType <> Button.OK AND Params.ButtonType <> Button.OK_Cancel AND Params.ButtonType <> Button.Abort_Retry_Ignore AND Params.ButtonType <> Button.Yes_No_Cancel AND Params.ButtonType <> Button.Yes_No AND Params.ButtonType <> Button.Retry_Cancel AND Params.ButtonType <> Button.Cancel_TryAgain_Continue AND Params.ButtonType <> Button.None THEN
+            Params.ButtonType = Button.OK
             Params.ButtonType = "\" + CHR$(34) + Params.ButtonType + "\" + CHR$(34)
             SHELL$ = SHELL$ + " " + Params.ButtonType
         ELSE
@@ -29,79 +31,70 @@ FUNCTION WPFMessageBox (Params AS Params)
             SHELL$ = SHELL$ + " " + Params.ButtonType
         END IF
     ELSE
-        Params.ButtonType = "OK"
+        Params.ButtonType = Button.OK
         Params.ButtonType = "\" + CHR$(34) + Params.ButtonType + "\" + CHR$(34)
         SHELL$ = SHELL$ + " " + Params.ButtonType
     END IF
 
-    IF Params.ContentFontSize <> "" AND INSTR(Params.ContentFontSize, "\" + CHR$(34)) = 0 THEN
-        Params.ContentFontSize = "\" + CHR$(34) + Params.ContentFontSize + "\" + CHR$(34) '$args[3]
-        SHELL$ = SHELL$ + " " + Params.ContentFontSize
+    IF Params.ContentFontSize <> 0 THEN
+        'Params.ContentFontSize = "\" + CHR$(34) + Params.ContentFontSize + "\" + CHR$(34) '$args[3]
+        SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.ContentFontSize)) + "\" + CHR$(34)
     ELSE
-        Params.ContentFontSize = "14"
-        Params.ContentFontSize = "\" + CHR$(34) + Params.ContentFontSize + "\" + CHR$(34)
-        SHELL$ = SHELL$ + " " + Params.ContentFontSize
+        Params.ContentFontSize = 14
+        'Params.ContentFontSize = "\" + CHR$(34) + Params.ContentFontSize + "\" + CHR$(34)
+        SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.ContentFontSize)) + "\" + CHR$(34)
     END IF
 
-    IF Params.TitleFontSize <> "" AND INSTR(Params.TitleFontSize, "\" + CHR$(34)) = 0 THEN
-        Params.TitleFontSize = "\" + CHR$(34) + Params.TitleFontSize + "\" + CHR$(34) '$args[4]
-        SHELL$ = SHELL$ + " " + Params.TitleFontSize
+    IF Params.TitleFontSize <>  0 THEN
+        'Params.TitleFontSize = "\" + CHR$(34) + Params.TitleFontSize + "\" + CHR$(34) '$args[4]
+        SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.TitleFontSize)) + "\" + CHR$(34)
     ELSE
-        Params.TitleFontSize = "14"
-        Params.TitleFontSize = "\" + CHR$(34) + Params.TitleFontSize + "\" + CHR$(34)
-        SHELL$ = SHELL$ + " " + Params.TitleFontSize
+        Params.TitleFontSize = 14
+        'Params.TitleFontSize = "\" + CHR$(34) + Params.TitleFontSize + "\" + CHR$(34)
+        SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.TitleFontSize)) + "\" + CHR$(34)
     END IF
 
-    IF Params.BorderThickness <> "" AND INSTR(Params.BorderThickness, "\" + CHR$(34)) = 0 THEN
-        Params.BorderThickness = "\" + CHR$(34) + Params.BorderThickness + "\" + CHR$(34) '$args[5]
-        SHELL$ = SHELL$ + " " + Params.BorderThickness
+    IF Params.BorderThickness <> 0 THEN
+        'Params.BorderThickness = "\" + CHR$(34) + Params.BorderThickness + "\" + CHR$(34) '$args[5]
+        SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.BorderThickness)) + "\" + CHR$(34)
     ELSE
-        Params.BorderThickness = "0"
-        Params.BorderThickness = "\" + CHR$(34) + Params.BorderThickness + "\" + CHR$(34)
-        SHELL$ = SHELL$ + " " + Params.BorderThickness
+        Params.BorderThickness = 0
+        'Params.BorderThickness = "\" + CHR$(34) + Params.BorderThickness + "\" + CHR$(34)
+        SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.BorderThickness)) + "\" + CHR$(34)
     END IF
 
-    IF Params.CornerRadius <> "" AND INSTR(Params.CornerRadius, "\" + CHR$(34)) = 0 THEN
-        Params.CornerRadius = "\" + CHR$(34) + Params.CornerRadius + "\" + CHR$(34) '$args[6]
-        SHELL$ = SHELL$ + " " + Params.CornerRadius
+    IF Params.CornerRadius <> 0 THEN
+        'Params.CornerRadius = "\" + CHR$(34) + Params.CornerRadius + "\" + CHR$(34) '$args[6]
+        SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.CornerRadius)) + "\" + CHR$(34)
     ELSE
-        Params.CornerRadius = "5"
-        Params.CornerRadius = "\" + CHR$(34) + Params.CornerRadius + "\" + CHR$(34)
-        SHELL$ = SHELL$ + " " + Params.CornerRadius
+        Params.CornerRadius = 5
+        'Params.CornerRadius = "\" + CHR$(34) + Params.CornerRadius + "\" + CHR$(34)
+        SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.CornerRadius)) + "\" + CHR$(34)
     END IF
 
-    IF Params.ShadowDepth <> "" AND INSTR(Params.ShadowDepth, "\" + CHR$(34)) = 0 THEN
-        Params.ShadowDepth = "\" + CHR$(34) + Params.ShadowDepth + "\" + CHR$(34) '$args[7]
-        SHELL$ = SHELL$ + " " + Params.ShadowDepth
+    IF Params.ShadowDepth <> 0 THEN
+        'Params.ShadowDepth = "\" + CHR$(34) + Params.ShadowDepth + "\" + CHR$(34) '$args[7]
+        SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.ShadowDepth)) + "\" + CHR$(34)
     ELSE
-        Params.ShadowDepth = "3"
-        Params.ShadowDepth = "\" + CHR$(34) + Params.ShadowDepth + "\" + CHR$(34)
-        SHELL$ = SHELL$ + " " + Params.ShadowDepth
+        Params.ShadowDepth = 3
+        'Params.ShadowDepth = "\" + CHR$(34) + Params.ShadowDepth + "\" + CHR$(34)
+        SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.ShadowDepth)) + "\" + CHR$(34)
     END IF
 
-    IF Params.BlurRadius <> "" AND INSTR(Params.BlurRadius, "\" + CHR$(34)) = 0 THEN
-        Params.BlurRadius = "\" + CHR$(34) + Params.BlurRadius + "\" + CHR$(34) '$args[8]
-        SHELL$ = SHELL$ + " " + Params.BlurRadius
+    IF Params.BlurRadius <> 0 THEN
+        'Params.BlurRadius = "\" + CHR$(34) + Params.BlurRadius + "\" + CHR$(34) '$args[8]
+        SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.BlurRadius)) + "\" + CHR$(34)
     ELSE
-        Params.BlurRadius = "20"
-        Params.BlurRadius = "\" + CHR$(34) + Params.BlurRadius + "\" + CHR$(34)
-        SHELL$ = SHELL$ + " " + Params.BlurRadius
-    END IF
-
-    IF Params.Timeout <> "" AND INSTR(Params.Timeout, "\" + CHR$(34)) = 0 THEN
-        Params.Timeout = "\" + CHR$(34) + Params.Timeout + "\" + CHR$(34) '$args[9]
-        SHELL$ = SHELL$ + " " + Params.Timeout
-    ELSE
-        Params.Timeout = "999"
-        Params.Timeout = "\" + CHR$(34) + Params.Timeout + "\" + CHR$(34)
-        SHELL$ = SHELL$ + " " + Params.Timeout
+        Params.BlurRadius = 20
+        'Params.BlurRadius = "\" + CHR$(34) + Params.BlurRadius + "\" + CHR$(34)
+        SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.BlurRadius)) + "\" + CHR$(34)
     END IF
 
     IF Params.ContentBackground <> "" AND INSTR(Params.ContentBackground, "\" + CHR$(34)) = 0 THEN
         Params.ContentBackground = "\" + CHR$(34) + Params.ContentBackground + "\" + CHR$(34) '$args[10]
         SHELL$ = SHELL$ + " " + Params.ContentBackground
     ELSE
-        Params.ContentBackground = "White"
+        Params.ContentBackground = Hue.White
         Params.ContentBackground = "\" + CHR$(34) + Params.ContentBackground + "\" + CHR$(34)
         SHELL$ = SHELL$ + " " + Params.ContentBackground
     END IF
@@ -119,7 +112,7 @@ FUNCTION WPFMessageBox (Params AS Params)
         Params.TitleFontWeight = "\" + CHR$(34) + Params.TitleFontWeight + "\" + CHR$(34) '$args[12]
         SHELL$ = SHELL$ + " " + Params.TitleFontWeight
     ELSE
-        Params.TitleFontWeight = "Normal"
+        Params.TitleFontWeight = FontWeight.Normal
         Params.TitleFontWeight = "\" + CHR$(34) + Params.TitleFontWeight + "\" + CHR$(34)
         SHELL$ = SHELL$ + " " + Params.TitleFontWeight
     END IF
@@ -128,7 +121,7 @@ FUNCTION WPFMessageBox (Params AS Params)
         Params.ContentFontWeight = "\" + CHR$(34) + Params.ContentFontWeight + "\" + CHR$(34) '$args[13]
         SHELL$ = SHELL$ + " " + Params.ContentFontWeight
     ELSE
-        Params.ContentFontWeight = "Normal"
+        Params.ContentFontWeight = FontWeight.Normal
         Params.ContentFontWeight = "\" + CHR$(34) + Params.ContentFontWeight + "\" + CHR$(34)
         SHELL$ = SHELL$ + " " + Params.ContentFontWeight
     END IF
@@ -137,7 +130,7 @@ FUNCTION WPFMessageBox (Params AS Params)
         Params.TitleTextForeground = "\" + CHR$(34) + Params.TitleTextForeground + "\" + CHR$(34) '$args[14]
         SHELL$ = SHELL$ + " " + Params.TitleTextForeground
     ELSE
-        Params.TitleTextForeground = "Black"
+        Params.TitleTextForeground = Hue.Black
         Params.TitleTextForeground = "\" + CHR$(34) + Params.TitleTextForeground + "\" + CHR$(34)
         SHELL$ = SHELL$ + " " + Params.TitleTextForeground
     END IF
@@ -146,7 +139,7 @@ FUNCTION WPFMessageBox (Params AS Params)
         Params.ContentTextForeground = "\" + CHR$(34) + Params.ContentTextForeground + "\" + CHR$(34) '$args[15]
         SHELL$ = SHELL$ + " " + Params.ContentTextForeground
     ELSE
-        Params.ContentTextForeground = "Black"
+        Params.ContentTextForeground = Hue.Black
         Params.ContentTextForeground = "\" + CHR$(34) + Params.ContentTextForeground + "\" + CHR$(34)
         SHELL$ = SHELL$ + " " + Params.ContentTextForeground
     END IF
@@ -155,7 +148,7 @@ FUNCTION WPFMessageBox (Params AS Params)
         Params.BorderBrush = "\" + CHR$(34) + Params.BorderBrush + "\" + CHR$(34) '$args[16]
         SHELL$ = SHELL$ + " " + Params.BorderBrush
     ELSE
-        Params.BorderBrush = "Black"
+        Params.BorderBrush = Hue.Black
         Params.BorderBrush = "\" + CHR$(34) + Params.BorderBrush + "\" + CHR$(34)
         SHELL$ = SHELL$ + " " + Params.BorderBrush
     END IF
@@ -164,7 +157,7 @@ FUNCTION WPFMessageBox (Params AS Params)
         Params.TitleBackground = "\" + CHR$(34) + Params.TitleBackground + "\" + CHR$(34) '$args[17]
         SHELL$ = SHELL$ + " " + Params.TitleBackground
     ELSE
-        Params.TitleBackground = "White"
+        Params.TitleBackground = Hue.White
         Params.TitleBackground = "\" + CHR$(34) + Params.TitleBackground + "\" + CHR$(34)
         SHELL$ = SHELL$ + " " + Params.TitleBackground
     END IF
@@ -173,7 +166,7 @@ FUNCTION WPFMessageBox (Params AS Params)
         Params.ButtonTextForeground = "\" + CHR$(34) + Params.ButtonTextForeground + "\" + CHR$(34) '$args[18]
         SHELL$ = SHELL$ + " " + Params.ButtonTextForeground
     ELSE
-        Params.ButtonTextForeground = "Black"
+        Params.ButtonTextForeground = Hue.Black
         Params.ButtonTextForeground = "\" + CHR$(34) + Params.ButtonTextForeground + "\" + CHR$(34)
         SHELL$ = SHELL$ + " " + Params.ButtonTextForeground
     END IF
@@ -182,7 +175,7 @@ FUNCTION WPFMessageBox (Params AS Params)
         Params.Sound = "\" + CHR$(34) + Params.Sound + "\" + CHR$(34) '$args[19]
         SHELL$ = SHELL$ + " " + Params.Sound
     ELSE
-        Params.Sound = "Windows Notify System Generic"
+        Params.Sound = Alert.NotifySystemGeneric
         Params.Sound = "\" + CHR$(34) + Params.Sound + "\" + CHR$(34)
         SHELL$ = SHELL$ + " " + Params.Sound
     END IF
@@ -203,6 +196,8 @@ FUNCTION WPFMessageBox (Params AS Params)
     END IF
 
     SHELL$ = SHELL$ + ";exit $LASTEXITCODE" + CHR$(34)
+    DIM a
     a = _SHELLHIDE(SHELL$)
+    'a = SHELL(SHELL$)
     WPFMessageBox = a
 END FUNCTION
