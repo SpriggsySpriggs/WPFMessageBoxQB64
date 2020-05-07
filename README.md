@@ -1,6 +1,6 @@
 # WPFMessageBoxQB64
 Create custom MessageBoxes for your QB64 programs using WPF (Windows Presentation Foundation)!
-Uses a PowerShell function class from:
+Uses a PowerShell function class written by Trevor Jones from:
 https://smsagent.blog/2017/08/24/a-customisable-wpf-messagebox-for-powershell/
 
 Colors for the Color Properties:
