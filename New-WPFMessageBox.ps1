@@ -404,7 +404,7 @@ Function New-WPFMessageBox {
     {
         $Window.Add_Loaded({
             $This.Activate()
-            $window.topmost=$true
+            $window.topmost=$false
             Invoke-Command $OnLoaded
         })
     }
@@ -412,7 +412,7 @@ Function New-WPFMessageBox {
     {
         $Window.Add_Loaded({
             $This.Activate()
-            $window.topmost=$true
+            $window.topmost=$false
         })
     }
     
@@ -492,9 +492,6 @@ BorderThickness = $args[5]
 CornerRadius = $args[6]
 ShadowDepth = $args[7]
 BlurRadius = $args[8]
-#Timeout = $args[9]
-#OnLoaded = $args[10]
-#OnClosed = $args[11]
 ContentBackground = $args[9]
 FontFamily = $args[10]
 TitleFontWeight = $args[11]
@@ -505,9 +502,7 @@ BorderBrush = $args[15]
 TitleBackground = $args[16]
 ButtonTextForeground = $args[17]
 Sound = $args[18]
-#CustomButtons = $args[19],$args[20],$args[21]
 }
-
 New-WPFMessageBox @Params
 #Write-Output $WPFMessageBoxOutput
 switch ($WPFMessageBoxOutput){
