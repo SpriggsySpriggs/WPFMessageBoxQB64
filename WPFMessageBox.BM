@@ -29,42 +29,42 @@ FUNCTION WPFMessageBox (Params AS Params)
         SHELL$ = SHELL$ + " " + "\" + CHR$(34) + Params.ButtonType + "\" + CHR$(34)
     END IF
 
-    IF Params.ContentFontSize <> 0 THEN
+    IF Params.ContentFontSize > 0 THEN
         SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.ContentFontSize)) + "\" + CHR$(34)
     ELSE
         Params.ContentFontSize = 14
         SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.ContentFontSize)) + "\" + CHR$(34)
     END IF
 
-    IF Params.TitleFontSize <> 0 THEN
+    IF Params.TitleFontSize > 0 THEN
         SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.TitleFontSize)) + "\" + CHR$(34)
     ELSE
         Params.TitleFontSize = 14
         SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.TitleFontSize)) + "\" + CHR$(34)
     END IF
 
-    IF Params.BorderThickness <> 0 THEN
+    IF Params.BorderThickness > 0 THEN
         SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.BorderThickness)) + "\" + CHR$(34)
     ELSE
         Params.BorderThickness = 0
         SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.BorderThickness)) + "\" + CHR$(34)
     END IF
 
-    IF Params.CornerRadius <> 0 THEN
+    IF Params.CornerRadius > 0 THEN
         SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.CornerRadius)) + "\" + CHR$(34)
     ELSE
         Params.CornerRadius = 5
         SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.CornerRadius)) + "\" + CHR$(34)
     END IF
 
-    IF Params.ShadowDepth <> 0 THEN
+    IF Params.ShadowDepth > 0 THEN
         SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.ShadowDepth)) + "\" + CHR$(34)
     ELSE
         Params.ShadowDepth = 3
         SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.ShadowDepth)) + "\" + CHR$(34)
     END IF
 
-    IF Params.BlurRadius <> 0 THEN
+    IF Params.BlurRadius > 0 THEN
         SHELL$ = SHELL$ + " " + "\" + CHR$(34) + LTRIM$(STR$(Params.BlurRadius)) + "\" + CHR$(34)
     ELSE
         Params.BlurRadius = 20
