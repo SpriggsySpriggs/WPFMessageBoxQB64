@@ -1,6 +1,7 @@
 '$INCLUDE:'WPFMessageBox.BI'
-$CONSOLE:ONLY
-_CONSOLETITLE "WPFMessageBox Select Case Test"
+'$CONSOLE:ONLY
+'_DEST _CONSOLE
+_TITLE "WPFMessageBox Select Case Test"
 ON ERROR GOTO ERRHANDLE
 ERRHANDLE:
 IF ERR THEN
@@ -14,8 +15,11 @@ IF ERR THEN
 END IF
 
 OPEN "123.txt" FOR INPUT AS #1
+PRINT "Resumed"
+i = _LOADIMAGE("blarg.png")
+PRINT "Resumed"
 LINE INPUT #1, blargh$
-_ECHO "RESUMED"
+PRINT "Resumed"
 Params.Title = ""
 Params.Content = "Choose an option, please"
 Params.TitleFontSize = 20
@@ -33,25 +37,25 @@ Params.ButtonType = Button.Cancel_TryAgain_Continue
 
 SELECT CASE WPFMessageBox(Params)
     CASE ButtonClicked.OK
-        _ECHO "OK"
+        PRINT "OK"
     CASE ButtonClicked.Cancel
-        _ECHO "Cancel"
+        PRINT "Cancel"
     CASE ButtonClicked.Abort
-        _ECHO "Abort"
+        PRINT "Abort"
     CASE ButtonClicked.Retry
-        _ECHO "Retry"
+        PRINT "Retry"
     CASE ButtonClicked.Ignore
-        _ECHO "Ignore"
+        PRINT "Ignore"
     CASE ButtonClicked.Yes
-        _ECHO "Yes"
+        PRINT "Yes"
     CASE ButtonClicked.No
-        _ECHO "No"
+        PRINT "No"
     CASE ButtonClicked.TryAgain
-        _ECHO "TryAgain"
+        PRINT "TryAgain"
     CASE ButtonClicked.Continue
-        _ECHO "Continue"
+        PRINT "Continue"
     CASE ELSE
-        _ECHO "Didn't exit with an expected code or exited prematurely"
+        PRINT "Didn't exit with an expected code or exited prematurely"
 END SELECT
 
 '$INCLUDE:'WPFMessageBox.BM'

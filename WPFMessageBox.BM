@@ -152,139 +152,139 @@ END FUNCTION
 SUB CriticalError (ERRR,ERRLINE,INCL$)
 SELECT CASE ERRR
     CASE 1
-        ERR$ = "1 - NEXT without FOR"
+        ERR$ = "EXT without FOR"
     CASE 2
-        ERR$ = "2 - Syntax error"
+        ERR$ = "yntax error"
     CASE 3
-        ERR$ = "3 - RETURN without GOSUB"
+        ERR$ = "ETURN without GOSUB"
     CASE 4
-        ERR$ = "4 - Out of DATA"
+        ERR$ = "ut of DATA"
     CASE 5
-        ERR$ = "5 - Illegal function call"
+        ERR$ = "llegal function call"
     CASE 6
-        ERR$ = "6 - Overflow"
+        ERR$ = "verflow"
     CASE 7
-        ERR$ = "7 - Out of memory"
+        ERR$ = "ut of memory"
     CASE 8
-        ERR$ = "8 - Label not defined"
+        ERR$ = "abel not defined"
     CASE 9
-        ERR$ = "9 - Subscript out of range"
+        ERR$ = "ubscript out of range"
     CASE 10
-        ERR$ = "10 - Duplicate definition"
+        ERR$ = "Duplicate definition"
     CASE 11
-        ERR$ = "11 - Division by zero"
+        ERR$ = "Division by zero"
     CASE 12
-        ERR$ = "12 - Illegal in direct mode"
+        ERR$ = "Illegal in direct mode"
     CASE 13
-        ERR$ = "13 - Type mismatch"
+        ERR$ = "Type mismatch"
     CASE 14
-        ERR$ = "14 - Out of string space"
+        ERR$ = "Out of string space"
     CASE 16
-        ERR$ = "16 - String formula too complex"
+        ERR$ = "String formula too complex"
     CASE 17
-        ERR$ = "17 - Cannot continue"
+        ERR$ = "Cannot continue"
     CASE 18
-        ERR$ = "18 - Function not defined"
+        ERR$ = "Function not defined"
     CASE 19
-        ERR$ = "19 - No RESUME"
+        ERR$ = "No RESUME"
     CASE 20
-        ERR$ = "20 - RESUME without error"
+        ERR$ = "RESUME without error"
     CASE 24
-        ERR$ = "24 - Device timeout"
+        ERR$ = "Device timeout"
     CASE 25
-        ERR$ = "25 - Device fault"
+        ERR$ = "Device fault"
     CASE 26
-        ERR$ = "26 - FOR without NEXT"
+        ERR$ = "FOR without NEXT"
     CASE 27
-        ERR$ = "27 - Out of paper"
+        ERR$ = "Out of paper"
     CASE 29
-        ERR$ = "29 - WHILE without WEND"
+        ERR$ = "WHILE without WEND"
     CASE 30
-        ERR$ = "30 - WEND without WHILE"
+        ERR$ = "WEND without WHILE"
     CASE 33
-        ERR$ = "33 - Duplicate label"
+        ERR$ = "Duplicate label"
     CASE 35
-        ERR$ = "35 - Subprogram not defined"
+        ERR$ = "Subprogram not defined"
     CASE 37
-        ERR$ = "37 - Argument-count mismatch"
+        ERR$ = "Argument-count mismatch"
     CASE 38
-        ERR$ = "38 - Array not defined"
+        ERR$ = "Array not defined"
     CASE 40
-        ERR$ = "40 - Variable required"
+        ERR$ = "Variable required"
     CASE 50
-        ERR$ = "50 - FIELD overflow"
+        ERR$ = "FIELD overflow"
     CASE 51
-        ERR$ = "51 - Internal error"
+        ERR$ = "Internal error"
     CASE 52
-        ERR$ = "52 - Bad file name or number"
+        ERR$ = "Bad file name or number"
     CASE 53
-        ERR$ = "53 - File not found"
+        ERR$ = "File not found"
     CASE 54
-        ERR$ = "54 - Bad file mode"
+        ERR$ = "Bad file mode"
     CASE 55
-        ERR$ = "55 - File already open"
+        ERR$ = "File already open"
     CASE 56
-        ERR$ = "56 - FIELD statement active"
+        ERR$ = "FIELD statement active"
     CASE 57
-        ERR$ = "57 - Device I/O error"
+        ERR$ = "Device I/O error"
     CASE 58
-        ERR$ = "58 - File already exists"
+        ERR$ = "File already exists"
     CASE 59
-        ERR$ = "59 - Bad record length"
+        ERR$ = "Bad record length"
     CASE 61
-        ERR$ = "61 - Disk full"
+        ERR$ = "Disk full"
     CASE 62
-        ERR$ = "62 - Input past end of file"
+        ERR$ = "Input past end of file"
     CASE 63
-        ERR$ = "63 - Bad record number"
+        ERR$ = "Bad record number"
     CASE 64
-        ERR$ = "64 - Bad file name"
+        ERR$ = "Bad file name"
     CASE 67
-        ERR$ = "67 - Too many files"
+        ERR$ = "Too many files"
     CASE 68
-        ERR$ = "68 - Device unavailable"
+        ERR$ = "Device unavailable"
     CASE 69
-        ERR$ = "69 - Communication-buffer overflow"
+        ERR$ = "Communication-buffer overflow"
     CASE 70
-        ERR$ = "70 - Permission denied"
+        ERR$ = "Permission denied"
     CASE 71
-        ERR$ = "71 - Disk not ready"
+        ERR$ = "Disk not ready"
     CASE 72
-        ERR$ = "72 - Disk media error"
+        ERR$ = "Disk media error"
     CASE 73
-        ERR$ = "73 - Feature unavailable"
+        ERR$ = "Feature unavailable"
     CASE 74
-        ERR$ = "74 - Rename across disks"
+        ERR$ = "Rename across disks"
     CASE 75
-        ERR$ = "75 - Path/File access error"
+        ERR$ = "Path/File access error"
     CASE 76
-        ERR$ = "76 - Path not found"
+        ERR$ = "Path not found"
     CASE 258
-        ERR$ = "258 - Invalid handle"
+        ERR$ = "Invalid handle"
 END SELECT
 '_ECHO ERR$
-    Params.FontFamily = "Verdana"
+    Params.FontFamily = "Segoe UI"
     Params.Title = ":("
-    Params.TitleFontSize = 80
+    Params.TitleFontSize = 100
     Params.TitleTextForeground = Hue.White
     Params.TitleBackground = Hue.SteelBlue
     IF INCL$ <> "" THEN
-        Params.Content = "The program ran into a problem that it couldn't handle.\n\nERROR CODE: " + ERR$ + " on line " + LTRIM$(STR$(ERRLINE)) + " in " + INCL$ + "\n\nContinue?"
+        Params.Content = "The program ran into a problem that it couldn't handle.\n\nError Code: " + LTRIM$(STR$(ERRR)) + "\n" + ERR$ + " on line " + LTRIM$(STR$(ERRLINE)) + " in " + INCL$ + "\n\nFor more information about this issue and possible fixes, visit https://www.qb64.org/wiki/ERROR_Codes\n\nContinue?"
     ELSE
-        Params.Content = "The program ran into a problem that it couldn't handle.\n\nERROR CODE: " + ERR$ + " on line " + LTRIM$(STR$(ERRLINE)) + " in main module" + "\n\nContinue?"
+        Params.Content = "The program ran into a problem that it couldn't handle.\n\nError Code: " + LTRIM$(STR$(ERRR)) +"\n" + ERR$ + " on line " + LTRIM$(STR$(ERRLINE)) + " in main module" + "\n\nFor more information about this issue and possible fixes, visit https://www.qb64.org/wiki/ERROR_Codes\n\nContinue?"
     END IF
-    Params.ContentFontSize = 16
+    Params.ContentFontSize = 18
     Params.ContentTextForeground = Hue.White
     Params.ContentBackground = Hue.SteelBlue
     Params.ButtonTextForeground = Hue.White
     Params.BorderThickness = 0
     Params.ShadowDepth = 10
     Params.Sound = Alert.HardwareFail
-    Params.ButtonType = Button.OK_Cancel
+    Params.ButtonType = Button.Yes_No
     SELECT CASE WPFMessageBox(Params)
-        CASE ButtonClicked.OK
+        CASE ButtonClicked.Yes
             EXIT SUB
-        CASE ButtonClicked.Cancel
+        CASE ButtonClicked.No
             SYSTEM
     END SELECT
 END SUB
