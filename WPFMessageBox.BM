@@ -145,10 +145,11 @@ FUNCTION WPFMessageBox (Params AS Params)
     SHELL$ = SHELL$ + ";exit $LASTEXITCODE" + CHR$(34)
     DIM a
     a = _SHELLHIDE(SHELL$)
+    '_ECHO SHELL$
     'a = SHELL(SHELL$)
     WPFMessageBox = a
 END FUNCTION
-SUB CriticalError (ERRR)
+SUB CriticalError (ERRR,ERRLINE,INCL$)
 SELECT CASE ERRR
     CASE 1
         ERR$ = "1 - NEXT without FOR"
@@ -267,7 +268,11 @@ END SELECT
     Params.TitleFontSize = 80
     Params.TitleTextForeground = Hue.White
     Params.TitleBackground = Hue.SteelBlue
-    Params.Content = "The program ran into a problem that it couldn't handle.\n\nERROR CODE: " + ERR$ + "\n\nContinue?"
+    IF INCL$ <> "" THEN
+        Params.Content = "The program ran into a problem that it couldn't handle.\n\nERROR CODE: " + ERR$ + " on line " + LTRIM$(STR$(ERRLINE)) + " in " + INCL$ + "\n\nContinue?"
+    ELSE
+        Params.Content = "The program ran into a problem that it couldn't handle.\n\nERROR CODE: " + ERR$ + " on line " + LTRIM$(STR$(ERRLINE)) + " in main module" + "\n\nContinue?"
+    END IF
     Params.ContentFontSize = 16
     Params.ContentTextForeground = Hue.White
     Params.ContentBackground = Hue.SteelBlue
