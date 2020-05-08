@@ -4,8 +4,13 @@
 'ON ERROR GOTO ERRHANDLE
 'ERRHANDLE:
 'IF ERR THEN
-'    CriticalError ERR
-'    RESUME NEXT
+'    IF _INCLERRORLINE THEN
+'        CriticalError ERR, _INCLERRORLINE, _INCLERRORFILE$
+'        RESUME NEXT
+'    ELSE
+'        CriticalError ERR, _ERRORLINE, ""
+'        RESUME NEXT
+'    END IF
 'END IF
 ''$CONSOLE:ONLY
 '=============================================
