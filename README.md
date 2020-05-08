@@ -11,5 +11,6 @@ I've edited the PowerShell code to work alongside QB64. It will allow you to cre
 Here is where you will find all the error codes that are supported in my new error handling message box function that I've added:
 https://www.qb64.org/wiki/ERROR_Codes
 
-05/08/20
+05/08/20:
+
 Working on adding a drop down box into the message boxes for more info on an error or other things that you might want to pop up onto the screen. It might not be possible with how I'm interacting with the PowerShell script. Also looking at getting clickable links as well.
