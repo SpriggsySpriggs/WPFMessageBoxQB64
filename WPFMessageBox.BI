@@ -1,4 +1,12 @@
 '$INCLUDE:'New-WPFMessageBox.ps1.bin.bas'
+'Paste the following lines into your main page of code
+'to use the new error handling feature
+'ON ERROR GOTO ERRHANDLE
+'ERRHANDLE:
+'IF ERR THEN
+'    CriticalError ERR
+'    RESUME NEXT
+'END IF
 ''$CONSOLE:ONLY
 '=============================================
 TYPE Params
@@ -28,11 +36,10 @@ TYPE Params
     'Valid colors are listed at https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.colors?view=netframework-4.8
     Sound AS STRING 'not mandatory, defaults to Alert.NotifySystemGeneric
     'Valid sounds are listed in Alert
-    'CustomButton1 AS STRING 'not mandatory, only used if ButtonType = Button.None
-    'CustomButton2 AS STRING 'not mandatory, only used if ButtonType = Button.None
-    'CustomButton3 AS STRING 'not mandatory, only used if ButtonType = Button.None
 END TYPE
 DIM SHARED Params AS Params
+'DO NOT EDIT VALUES FOR THE VARIABLES BELOW THIS LINE
+'=====================================================
 TYPE ButtonClicked
     OK AS INTEGER
     Cancel AS INTEGER
