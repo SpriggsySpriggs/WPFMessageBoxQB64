@@ -152,23 +152,23 @@ END FUNCTION
 SUB CriticalError (ERRR,ERRLINE,INCL$)
 SELECT CASE ERRR
     CASE 1
-        ERR$ = "EXT without FOR"
+        ERR$ = "NEXT without FOR"
     CASE 2
-        ERR$ = "yntax error"
+        ERR$ = "Syntax error"
     CASE 3
-        ERR$ = "ETURN without GOSUB"
+        ERR$ = "RETURN without GOSUB"
     CASE 4
-        ERR$ = "ut of DATA"
+        ERR$ = "Out of DATA"
     CASE 5
         ERR$ = "llegal function call"
     CASE 6
-        ERR$ = "verflow"
+        ERR$ = "Overflow"
     CASE 7
-        ERR$ = "ut of memory"
+        ERR$ = "Out of memory"
     CASE 8
-        ERR$ = "abel not defined"
+        ERR$ = "Label not defined"
     CASE 9
-        ERR$ = "ubscript out of range"
+        ERR$ = "Subscript out of range"
     CASE 10
         ERR$ = "Duplicate definition"
     CASE 11
@@ -287,4 +287,17 @@ END SELECT
         CASE ButtonClicked.No
             SYSTEM
     END SELECT
+END SUB
+SUB SoftError (title AS STRING, content AS STRING)
+    Params.Title = title
+    Params.Content = content
+    Params.TitleFontSize = 28
+    Params.TitleFontWeight = FontWeight.Bold
+    Params.TitleBackground = Hue.Red
+    Params.ContentFontSize = 18
+    Params.ContentFontWeight = FontWeight.Medium
+    Params.ContentBackground = Hue.MintCream
+    Params.Sound = Alert.Error
+    Params.CornerRadius = 30
+    Answer = WPFMessageBox(Params)
 END SUB
