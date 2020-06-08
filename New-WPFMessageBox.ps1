@@ -404,7 +404,7 @@ Function New-WPFMessageBox {
     {
         $Window.Add_Loaded({
             $This.Activate()
-            $window.topmost=$false
+                $window.topmost=$True
             Invoke-Command $OnLoaded
         })
     }
@@ -412,7 +412,7 @@ Function New-WPFMessageBox {
     {
         $Window.Add_Loaded({
             $This.Activate()
-            $window.topmost=$false
+                $window.topmost=$True
         })
     }
     
@@ -481,10 +481,11 @@ Function New-WPFMessageBox {
 
     }
 }
-$CRLF = "&#xa;"
+#$CRLF = "&#xa;"
+#$tab = "&#x9;"
 $Params = @{
-Content = $args[0].ToString().Replace("\n",$CRLF)
-Title = $args[1].ToString().Replace("\n",$CRLF)
+Content = $args[0].ToString()#.Replace("\n",$CRLF)
+Title = $args[1].ToString()#.Replace("\n",$CRLF)
 ButtonType = $args[2]
 ContentFontSize = $args[3]
 TitleFontSize = $args[4]
@@ -503,6 +504,7 @@ TitleBackground = $args[16]
 ButtonTextForeground = $args[17]
 Sound = $args[18]
 }
+
 New-WPFMessageBox @Params
 #Write-Output $WPFMessageBoxOutput
 switch ($WPFMessageBoxOutput){

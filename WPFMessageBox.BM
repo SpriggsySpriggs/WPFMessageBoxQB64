@@ -1,8 +1,17 @@
 FUNCTION WPFMessageBox (Params AS Params)
     DIM SHELL$
-    SHELL$ = "PowerShell -ExecutionPolicy Bypass -Command " + CHR$(34) + "&'" + _STARTDIR$ + "\New-WPFMessageBox.ps1'"
-    'SHELL$ = "PowerShell -Command " + CHR$(34) + "&'" + _STARTDIR$ + "\New-WPFMessageBox.ps1'"
+    'SHELL$ = "PowerShell -ExecutionPolicy Bypass -Command " + CHR$(34) + "&'" + _STARTDIR$ + "\New-WPFMessageBox.ps1'"
+    DIM StartDir AS STRING
+    StartDir = COMMAND$(0)
+    StartDir = LEFT$(StartDir, _INSTRREV(StartDir, "\"))
+    SHELL$ = "PowerShell -ExecutionPolicy Bypass -Command " + CHR$(34) + "&'" + StartDir + "\New-WPFMessageBox.ps1'"
     '==============================================================================
+    IF INSTR(Params.Content, "\t") THEN
+        Params.Content = String.Replace(Params.Content, "\t", "&#x9;")
+    END IF
+    IF INSTR(Params.Content,"\n") THEN
+        Params.Content = String.Replace(Params.Content, "\n", "&#xa;")
+    END IF
     IF Params.Content <> "" AND INSTR(Params.Content, "\" + CHR$(34)) = 0 THEN
         SHELL$ = SHELL$ + " " + "\" + CHR$(34) + Params.Content + "\" + CHR$(34)
     ELSE
@@ -10,6 +19,12 @@ FUNCTION WPFMessageBox (Params AS Params)
         SHELL$ = SHELL$ + " " + "\" + CHR$(34) + Params.Content + "\" + CHR$(34)
     END IF
 
+    IF INSTR(Params.Title, "\t") THEN
+        Params.Title = String.Replace(Params.Title, "\t", "&#x9;")
+    END IF
+    IF INSTR(Params.Title, "\n") THEN
+        Params.Title = String.Replace(Params.Title, "\n", "&#xa;")
+    END IF
     IF Params.Title <> "" AND INSTR(Params.Title, "\" + CHR$(34)) = 0 THEN
         SHELL$ = SHELL$ + " " + "\" + CHR$(34) + Params.Title + "\" + CHR$(34)
     ELSE
@@ -289,7 +304,11 @@ END SELECT
     END SELECT
 END SUB
 SUB SoftError (title AS STRING, content AS STRING)
-    Params.Title = title
+    IF title = "" THEN
+        Params.Title = _TITLE$
+    ELSE
+        Params.Title = title
+    END IF
     Params.Content = content
     Params.TitleFontSize = 28
     Params.TitleFontWeight = FontWeight.Bold
@@ -301,3 +320,131 @@ SUB SoftError (title AS STRING, content AS STRING)
     Params.CornerRadius = 30
     Answer = WPFMessageBox(Params)
 END SUB
+SUB __NewWPFMessageBox
+    IF _FILEEXISTS("New-WPFMessageBox.ps1") = 0 THEN 'remove this line if you are compiling in FreeBasic
+        '#lang "qb" 'uncomment this line if compiling in FreeBasic
+        DIM A$
+        A$ = ""
+        A$ = A$ + "haIkL\fKKSSlknG1QZa5k3abfY_ce\XiifP=_#\gfNX=H1S=S]^89ZUB:?fL"
+        A$ = A$ + "ion=39U4e;KWdTdk`U5HC]87>c`i=YXh>anSRLhnT3HGfi;7]cn\`#j4f6l["
+        A$ = A$ + "8gdX11n_G#fQ;8\[XN1^\#bI`3aQ\U9Q<6akJbY^l9[Z1LJDD#hZMk6jQh`?"
+        A$ = A$ + "bnB^HLP0#Ym8^GgEjeo]Mkm^^[lZ^d>SR3ShN>QdCMIM^<h\>N::O:oZ>0=j"
+        A$ = A$ + "4`_T92WbLMk:a^V4KnYe?hGgNPn94SMjmn>mkCj#FOlHfHB8gSA4\o<fA0?A"
+        A$ = A$ + "33INWjj0<^S?9J:S<nJOZWc8B0E#mHA0=8AL2m2^cH2C8h`cG>UiC4anTc4L"
+        A$ = A$ + "?iP>J0I4g?Tkb8CiQAfVLdF\cLl1#BaW\m_]YgHGFd6>nSMlWdZm9bFU09oE"
+        A$ = A$ + ";iOEHH8#Q0N#L0IC^O48gBkkKYH]enDoad8^hjeJ>D4cFn8NX3ZhF[W6gBh?"
+        A$ = A$ + "ldo5KDd9=e8Ji658cU0o`_T4i4ibV3E>Sj6J#VnVT9<B0cZCJ>4aC9RLJLD4"
+        A$ = A$ + "8]TbeaS_KTI5CblIZ[307K0;ZeB7nK;]<lW>KBm7aLQO_nYLADWSIAR[k\k4"
+        A$ = A$ + "O^P1=n?IQM>PW1TjIh7:hBKGmS>35G_n4ZSO7DPih7SXh0^?K9CfP:4d[?Yi"
+        A$ = A$ + "6bYe`[3HTe8BfiQLRob:XhVBO45M3cA=]n5l6Qo4jlGgAUi[<9VSOV1c>`o<"
+        A$ = A$ + "0#7<3koZlc?DEOOYg[;A?9jZWJK01>HRQCM6M^?4Gh^A]gDRJ5#7#_N54W2O"
+        A$ = A$ + "VhHjHWhk8]NK5Bb<L14jMi8dPYD`oK;F#ddk6MNG9jHP:P<_<_hc=nN=KNOI"
+        A$ = A$ + "9G:V0R\BNYfGT1Cn44#l>6:9G8;^>TE6f:HgiahaAHhk#644N<h8LgXFo:<n"
+        A$ = A$ + "Th\P9`HV<iVR?8kaYHj4f5b`Xg=:V;8Fh8QC#4TVLdiWdl#O5NW9YgdU7NO9"
+        A$ = A$ + "m;W1YEhEAif99ggBU?TjjN=i889T;4_M\AfA9HJPTL0DG#21<V3#bGcT]jZ4"
+        A$ = A$ + "#]6TkLCM^cDh1Xk83TfIMeH^n0PLT1G76al\gB#QlDCFVL4Dj083XhD3L[HE"
+        A$ = A$ + "AHMP[=XS>ORP7kW5f]IY^`hfUJLY\1\N4TG32RcfTkjbDe5]V\b8ENe46<[k"
+        A$ = A$ + "#KE?k3Z#GSfoV6bD<VYEJVZ7Ck\BR0:IXL8?\<ZeSQd0BYPMi1?;4KWJY0TX"
+        A$ = A$ + "i>X]b<W]fPRYE5hYMV4_iaa#VB?F:#Ki87:EBS5MJXARZfYaEP[<j1i2Qlo0"
+        A$ = A$ + "^oFNc3k=4a#mQQW#ngTOU5eIO`>R98M6Pf;S8jWUFI79h1<Ade0T3HhDUdIk"
+        A$ = A$ + "[20ACJ7Bc_<JJDhamA9Ee`KYW8]cIoF_BX:Ldf#G?H3dh=[ZCkZ\f]nbDW8V"
+        A$ = A$ + "Em:_OLEF[b^I;WFPhbE>1K_86C:Y#5h^dHb#WI#E\fRMPPF^6VBI]QA2bNji"
+        A$ = A$ + "#0;B80b2hCV9C?IeEUo0b6H;m^blm6L^C0YoCTkf?^[fSQ?CVLj1dIa4Yc`;"
+        A$ = A$ + "YRH7iL<\6`V`ITOOG[BeoS`m5VcTYIEle\#7XWEQVNfmj^UQ]TgUZ^#UJB9B"
+        A$ = A$ + "O>[Wfb]\eWe1LQ7emA>YG1jn0j5G2cEh:G^ngZl<;eUAm_?kMn\giCF=Yo4l"
+        A$ = A$ + "?;Ai7nRBWS?J2jZ`IM8k:Hd2F=;H=Og6>]ikhI7gO#7gWG8i\LJ;I5J]Q;\<"
+        A$ = A$ + "\W6ofl4oQgg]8nWM>FI:ijLJ[XcdJPOfQmI7fWXJPoih^F1YOX;5n^iZZNC?"
+        A$ = A$ + "B3T<jHd8jJJlhc^T?kBnHhBVgRk9aEdPT?P^Pi`JE^N5CCFe;RY#7YY7OnU`"
+        A$ = A$ + "l\OhC#ZaWnG9B1bn#WBL>_>4cdQZc\B=U^FE_b4TEdncNX?kQnXTY\JK`WVD"
+        A$ = A$ + "VE#k7bLWERnIk`>8_7jP4Gb1oo\?h;Z2nTclRl`Sm`i^f2M:gLZSkhMQY6aZ"
+        A$ = A$ + "9coREEcc]4>G`n^NkNonn\a>D;BWMLLAcAMcomIk\ffnHF0HIcJ]TmUd;FJi"
+        A$ = A$ + "UFZmo;ionHh5>h1f]K`lmc4\XHQo\#U4dKESH3f47OSSmD=WN9cC[d>82_T;"
+        A$ = A$ + ">GSWDY?H=<2?1RgdXAjA76?QaOMmmgShA5W77dhKOMom>YiGYN^PhmSF=nPn"
+        A$ = A$ + "LQUb0Giij7^V5NL[aCKmXY<?JX]Wc81?TOFTl`F3iJ>kZ^[d[gKjN5PY^16L"
+        A$ = A$ + "WEN<]jEg=LI<lEaInJF:6dB]2Pe\\8hYjL8G_IKHoSSV^^oh?9g^L;]c2TbC"
+        A$ = A$ + "457\7OTT[FcJC0HVH`81SiW1de8:a3U[5iH6NfCa8HH;ZW\8[kj2NN35Do`0"
+        A$ = A$ + "ZPi?jje\`c8]59[#9\UTn16h`0j8W80^nFoRLfXUaPkI8?F0ZXO9MBn19;#6"
+        A$ = A$ + "B5CHAXNO=[K^JEY1P:2o]FI0[60;2m=Bll1Jcl2`3FG10=06MNSIUkF22:75"
+        A$ = A$ + "Lg4\TSED\#58>MdZU`E?0BPnEQchLR[KBXVn8\KdIaiK]l<8Ze>5PdXkLhP^"
+        A$ = A$ + "8;<SYAgI=?n#g2bX:4dM[GBWdWQB_[D[[=>jF]eQFdVj6\?eaGeT5IO#7i0f"
+        A$ = A$ + "dmkIUkh5_VE^C8\EaSj<dOQF\<gD;XkFcNo6JKA>R>6EI[I1dfH:Y0bNkc>3"
+        A$ = A$ + "RYF#0\5H[Z>AaZ^CWCK=HKL2hb5[Y[9S\US#5DN=[EN;#R\c8<blY?HINJWQ"
+        A$ = A$ + "N<Nb`1\WmK\<]=BdcUHc4fOX`Ib4H>GH2\=NJIemA>V39?6;K:9hT]jPgFU7"
+        A$ = A$ + "X<nn0\dSCiDA=fPOHN0X4SlhCMI[kkXBjAb6T]bYe#XFZ_\h5i4Ek8hNBEi#"
+        A$ = A$ + "NAYhFa2MXcN[fKen#X#8Oka\;0a3#5IADFcbakQRO=EjiIGcNnAhFdO\Ni?H"
+        A$ = A$ + "d<;Mh7jJJMDQ]FIK:E0a2XAk^Wh\7NnlL]=RWFYKKYSgHkB205STh=R?Lo`K"
+        A$ = A$ + "52=4IfJ7ALfDSToc>QaDGeNIZn=TM89[`f^b2mTL7RSK]Z#1ZR]?KB1nG0gN"
+        A$ = A$ + "4eWiZ5`I=0AaZPaZVKaUKQOmJ:LXg^48Nl^Q7cXS?dg=]hPM3oTCd#FH4<YL"
+        A$ = A$ + ">e=c44A18HUSe8H:69?kPbEST?3Pf:Xa:QB#FbcH?9;8\6lDa[n#S#eA>HF3"
+        A$ = A$ + ";3Zf;P]BQMD26bWh2Wo2`1eMMGW9nNbXX3RPRV71aLn<hbSO_06mYZK3[HK<"
+        A$ = A$ + "6Y7M[=aRfJ\R1D:gG_Z<OTje]hi]>d85oNAbBffKinmF6oS5QDGLTD4]P4BE"
+        A$ = A$ + "PUR>kA3ST[=4FdWKZmBUb[TYhmP=`HMd:k]HABV?WEPDBi:oB3[?f#_J2e\`"
+        A$ = A$ + "H=5Z6naG:amL945\Edfd_\P;f0fTH7CoXn_I65eKjDYfUgb6HmcGIFZcm:XM"
+        A$ = A$ + "3nWJDW7[FhbVaR#\BX?1;\7=E;:PA?F3Q\<H4niglcC>OOSH]`BjZ[7]R]nZ"
+        A$ = A$ + "MNam[Aam[WSgCm1Kb9l=>E7ogUdGW:AcO;PP[bcW28iB3GHSo:eNlN:l^oia"
+        A$ = A$ + ":lMR^0YT:MJiJ[4;OA#32T63h_bR1XR8\?m:M4RGg3l9gga?malYTef1H4`G"
+        A$ = A$ + "8oXmTKWRnkLFn1LSK]R\OmWH8^Wl9WIcmUkhR=JdPU7`4W\jZ8BJebHK]TKf"
+        A$ = A$ + "Si7XfGmLaoo0nHVJDT>[;V4SRhmL2S8=AUOkfV4e>R7h1i#`=g4;o8QSEOR_"
+        A$ = A$ + "TcBn<lEOj`4ZnK9F2e>9MRKlT>^Mf^A95eY7\9Sm9C3iSo\=;gBkBT7ed?I\"
+        A$ = A$ + "#RoOe\Q]VGbL7;2ER]:ZTb6G9X0e`O\??>T]=j<ejVLYXK29KB=j]=n2W]jo"
+        A$ = A$ + "f<2NK9><3[kaXG`FL\nViRe=MQdO5#8:]o<EhPGo2T>BIM^KoQ3SS2R1=QLc"
+        A$ = A$ + "B8PSM>605;]9M><#JFVDH=YcPA`:293TOfYT>#0\A\lC3]cPl;A]Ek:IL=8k"
+        A$ = A$ + "0o3bF]F:[0\UJSc7I1H9_MUfVKD[jc#EiiXn`Egm<B;c?Lo>\oTHMh_IY6Fn"
+        A$ = A$ + "]dEk_d9a80Qc4keP;mM:`M3Ue2P6IcU^U_l3F<6#>^i`3B\>7HddL^lI^kSQ"
+        A$ = A$ + "5S5QQ<7RO0o1B:Zh^7JfJFDdlJXHaXkRX=FdiKMgj5;6WHBUJ1:1gcSSCXlL"
+        A$ = A$ + "iIe>og1:hVTo2aX8?Se;A7=5#Q9HhWPNES;oH[U?c=DS8]i3kL<cSOQj5i8_"
+        A$ = A$ + "JE8WB54Wc8nLmc>QT01o2Wa\aIcDeEZQLBFB1TL#?`g`Fi#R9M^d\RKV]8B8"
+        A$ = A$ + "^Y<X9Dl^]REC?89R:2PRC3cKR69cV8Aj0CU_=#mZj:bdXP#nf=9SUk[8i?Si"
+        A$ = A$ + "A\#XJ\XYT#H4#CYGf>bn01CH\jbiAmjob^`:bCE?J4XJGbJYjdN==bMWTV:m"
+        A$ = A$ + "M]J]dbF;Ie^Pj3o?3Nog3I#MGAHA2Wb_BN56#eL5i2<=X]]MSRT;IkVNl;aY"
+        A$ = A$ + "`JLJ?;E_aVST;WINV>AeSoMkTgg^Yf4V`X##F?:DM0QYf\?2=4JH4RbDP7Jl"
+        A$ = A$ + "9kG#aLGi>SG;OVNJCDoG75nS\1TC_VJE_]_\>WTKo8>Aj^:_WW6;XCVXm:;c"
+        A$ = A$ + "Zhf[XhaTJc>;B5;H;nUn6eDU<d]0d]?jPY5^Ygc6[3U`O1nbk<FN24Ya5<<0"
+        A$ = A$ + "3\<o\TK8TB14d40I554EFRH2I<:^:5P;c]B4em8E>Xfeo2ni<8hWWW<LK2_D"
+        A$ = A$ + "\>]J=IN\IbLd?Ab>0PEMeNi46PV9P_3nFmUAPIG1>?QVRGe]Pb\4_:8:`ibA"
+        A$ = A$ + "_E:5`[#6ANfoVbCV2`KS\JQ9m]cA3X_dF^?JPOBcS:EB0IY9VmhEXVI6AlRS"
+        A$ = A$ + "aI2TYF6I1eTP_5CTYdb^JPZC]M8>P\DUi^CRBPYb3M0^4:eVR8AA^bAdLMTn"
+        A$ = A$ + "68BV3`T_GFN5g#;Kg11H6QbNCOMI`V4D18AF[BnZ1TmEJ6Rbj;UIoDWe6N^c"
+        A$ = A$ + "JcF>DXBl`8WAQfY#JF51`?bkGXe8EH7T>2k]MY1PaRm#N4eMPjRFRdI2STW_"
+        A$ = A$ + "VQ=B6^Z`j`D?DLaO5\NbHn2FMi?[AUBPVTnMhD#dRaD];<nJA\m^Xn7D_HFL"
+        A$ = A$ + "\U11DOln[#`mdRRFmKGo`AO]QhB\c4g][#oI;=mJ=34I2#Z=hA^d[a2AB?HP"
+        A$ = A$ + "B=GEkdVlP?e^\14fl>>^b];Hf7W]_?3lRWG=[2H5i]j>4H8n\=QZ#m<Y\EUh"
+        A$ = A$ + "<=524:<`5hSZcTP0G`DBe1:J[O?6<94BTe3_fODA1?R2DfWi4[:B`?f5]DBb"
+        A$ = A$ + "DUY4]EA_U8kVT^7<UO9hTjbWdZm]fOQjP:H=Q^]Ac=?N_M#mbOk5GAo7F=DW"
+        A$ = A$ + "BAl^FkSgd`XRFZHBhgjM2hNZ:m^Ef19djknF;;aCk6ZEDT0Ooi2_aJ]B6d:W"
+        A$ = A$ + "T#GSMIBee;?YAa[]?E7_jT6U_QmDMmJ4Mi^#lD]oVCJTo2\CelK1<INScYJm"
+        A$ = A$ + "MYlD^Sb_ZcgOBSLGO9jiN?3V=mK?GgGoLcaRm^RNTU>CbjnOIjX[3RDiAb70"
+        A$ = A$ + "T^mG[aL5cRnP0YVS2]60#d<8O;PHif6U_gFoXb6Za;nR`9ReA_CN=[HkmJ42"
+        A$ = A$ + "[<C^Ri:j\m==`][RL3D2E4Yo]=BFo_^UEPFDkVT^QG2=Xf\2M3_2J#_?AjFN"
+        A$ = A$ + "=d2^?:j7O3lh1lTWN;lDj^7XKkM8ICfZ0MK_of6_#_[0JN[7h:mO048O%%h1"
+        DIM btemp$
+        DIM i&
+        DIM B$
+        DIM C%
+        DIM F$
+        DIM C$
+        DIM j
+        DIM t%
+        DIM B&
+        DIM X$
+        DIM BASFILE$
+        btemp$ = ""
+        FOR i& = 1 TO LEN(A$) STEP 4: B$ = MID$(A$, i&, 4)
+            IF INSTR(1, B$, "%") THEN
+                FOR C% = 1 TO LEN(B$): F$ = MID$(B$, C%, 1)
+                    IF F$ <> "%" THEN C$ = C$ + F$
+                NEXT: B$ = C$: END IF: FOR j = 1 TO LEN(B$)
+                IF MID$(B$, j, 1) = "#" THEN
+            MID$(B$, j) = "@": END IF: NEXT
+            FOR t% = LEN(B$) TO 1 STEP -1
+                B& = B& * 64 + ASC(MID$(B$, t%)) - 48
+                NEXT: X$ = "": FOR t% = 1 TO LEN(B$) - 1
+                X$ = X$ + CHR$(B& AND 255): B& = B& \ 256
+        NEXT: btemp$ = btemp$ + X$: NEXT
+        BASFILE$ = _INFLATE$(btemp$): btemp$ = ""
+        OPEN "New-WPFMessageBox.ps1" FOR OUTPUT AS #1
+        PRINT #1, BASFILE$;
+        CLOSE #1
+    END IF 'remove this line if you are compiling in FreeBasic
+END SUB
+'$INCLUDE:'StringMethods.BM'

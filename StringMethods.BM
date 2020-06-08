@@ -1,0 +1,163 @@
+'DIM testItem(3) AS STRING
+'testItem(1) = "Pickle"
+'testItem(2) = "Pineapple"
+'testItem(3) = "Papaya"
+
+'PRINT String.Join(testItem(), ", ")
+
+'Test$ = "Ham and eggs"
+'Test2$ = "Green eggs and ham"
+'REDIM _PRESERVE Split(1 TO 1) AS STRING
+'String.Split Test$, " and ", Split(), 1
+'String.Split Test2$, " and ", Split(), 1
+'FOR i = LBOUND(Split) TO UBOUND(Split)
+'    PRINT Split(i)
+'NEXT
+'PRINT String.FormatPercent(1.5)
+'PRINT String.EndsWith("Hello my name is Zachary", "ary")
+'PRINT String.StartsWith("Hello my name is Zachary", "Hello")
+
+'PRINT String.PadLeft("Hello World", 15, "*")
+'PRINT String.PadRight("Hello World", 15, "*")
+
+FUNCTION String.PadLeft$ (padString AS STRING, totalWidth AS INTEGER, paddingChar AS STRING)
+    padString = STRING$(totalWidth - LEN(padString), paddingChar) + padString
+    String.PadLeft = padString
+END FUNCTION
+
+FUNCTION String.PadRight$ (padString AS STRING, totalWidth AS INTEGER, paddingChar AS STRING)
+    padString = padString + STRING$(totalWidth - LEN(padString), paddingChar)
+    String.PadRight = padString
+END FUNCTION
+
+FUNCTION String.StartsWith (check AS STRING, contains AS STRING)
+    IF MID$(check, 1, LEN(contains)) = contains THEN
+        String.StartsWith = -1
+    ELSE
+        String.StartsWith = 0
+    END IF
+END FUNCTION
+
+FUNCTION String.EndsWith (check AS STRING, value AS STRING)
+    IF INSTR(check, value) THEN
+        IF RIGHT$(check, LEN(value)) = value THEN
+            String.EndsWith = -1
+        ELSE
+            String.EndsWith = -1
+        END IF
+    ELSE
+        String.EndsWith = 0
+    END IF
+END FUNCTION
+
+FUNCTION String.FormatPercent$ (number AS DOUBLE)
+    number = number * 100
+    String.FormatPercent = String.Trim(STR$(number)) + "%"
+END FUNCTION
+
+FUNCTION String.Trim$ (trimString AS STRING)
+    trimString = LTRIM$(RTRIM$(trimString))
+    String.Trim = trimString
+END FUNCTION
+
+SUB String.Split (Expression AS STRING, delimeter AS STRING, StorageArray() AS STRING, preserve AS INTEGER)
+    DIM copy AS STRING, p AS LONG, curpos AS LONG, arrpos AS LONG, dpos AS LONG
+    copy = Expression
+    IF delimeter = " " THEN
+        copy = RTRIM$(LTRIM$(copy))
+        p = INSTR(copy, "  ")
+        WHILE p > 0
+            copy = MID$(copy, 1, p - 1) + MID$(copy, p + 1)
+            p = INSTR(copy, "  ")
+        WEND
+    END IF
+    curpos = 1
+    arrpos = UBOUND(StorageArray)
+    'arrpos = 0
+    dpos = INSTR(curpos, copy, delimeter)
+    DO UNTIL dpos = 0
+        IF preserve = 0 THEN
+            REDIM _PRESERVE StorageArray(arrpos) AS STRING
+            StorageArray(arrpos) = MID$(copy, curpos, dpos - curpos)
+            arrpos = arrpos + 1
+        ELSE
+            StorageArray(UBOUND(StorageArray)) = MID$(copy, curpos, dpos - curpos)
+            REDIM _PRESERVE StorageArray(UBOUND(StorageArray) + 1) AS STRING 'arrpos + 1) AS STRING
+        END IF
+        curpos = dpos + LEN(delimeter)
+        dpos = INSTR(curpos, copy, delimeter)
+    LOOP
+    IF preserve = 0 THEN
+        REDIM _PRESERVE StorageArray(arrpos) AS STRING
+        StorageArray(arrpos) = MID$(copy, curpos)
+        'REDIM _PRESERVE StorageArray(arrpos) AS STRING
+    ELSE
+        StorageArray(UBOUND(StorageArray)) = MID$(copy, curpos)
+        REDIM _PRESERVE StorageArray(UBOUND(StorageArray) + 1) AS STRING
+    END IF
+    'REDIM _PRESERVE StorageArray(UBOUND(StorageArray)) AS STRING
+END SUB
+
+'SUB String.Split (Expression AS STRING, delimeter AS STRING, StorageArray() AS STRING, preserve AS INTEGER)
+'    DIM curpos AS LONG, arrpos AS LONG, LD AS LONG, dpos AS LONG 'fix use the Lbound the array already has
+'    curpos = 1: arrpos = LBOUND(StorageArray): LD = LEN(delimeter)
+'    dpos = INSTR(curpos, Expression, delimeter)
+'    DO UNTIL dpos = 0
+'        IF preserve = 0 THEN
+'            StorageArray(arrpos) = MID$(Expression, curpos, dpos - curpos)
+'            arrpos = arrpos + 1
+'        ELSE
+'IF arrpos > UBOUND(StorageArray) THEN REDIM _PRESERVE StorageArray(LBOUND(StorageArray) TO UBOUND(StorageArray) + 1000) AS STRING
+'            REDIM _PRESERVE StorageArray(UBOUND(StorageArray) + 1)
+'        END IF
+'        curpos = dpos + LD
+'        dpos = INSTR(curpos, Expression, delimeter)
+'    LOOP
+'    IF preserve = 0 THEN
+'        StorageArray(arrpos) = MID$(Expression, curpos)
+'        REDIM _PRESERVE StorageArray(LBOUND(StorageArray) TO arrpos) AS STRING
+'    ELSE
+'        StorageArray(UBOUND(StorageArray)) = MID$(Expression, curpos)
+'        REDIM _PRESERVE StorageArray(LBOUND(StorageArray) TO UBOUND(StorageArray) + 1) AS STRING 'get the ubound correct
+'    END IF
+'END SUB
+
+FUNCTION String.Join$ (SourceArray() AS STRING, delimiter AS STRING)
+    DIM i
+    DIM joined AS STRING
+    FOR i = 1 TO UBOUND(SourceArray)
+        IF i = UBOUND(SourceArray) THEN
+            joined = joined + SourceArray(i)
+        ELSE
+            joined = joined + SourceArray(i) + delimiter
+        END IF
+    NEXT
+    String.Join = joined
+END FUNCTION
+
+FUNCTION String.Replace$ (a AS STRING, b AS STRING, c AS STRING)
+    j = INSTR(a, b)
+    IF j > 0 THEN
+        r$ = LEFT$(a, j - 1) + c + String.Replace(RIGHT$(a, LEN(a) - j + 1 - LEN(b)), b, c)
+    ELSE
+        r$ = a
+    END IF
+    String.Replace = r$
+END FUNCTION
+
+FUNCTION String.Remove$ (a AS STRING, b AS STRING)
+    DIM c AS STRING
+    c = ""
+    j = INSTR(a, b)
+    IF j > 0 THEN
+        r$ = LEFT$(a, j - 1) + c + String.Remove(RIGHT$(a, LEN(a) - j + 1 - LEN(b)), b)
+    ELSE
+        r$ = a
+    END IF
+    String.Remove = r$
+END FUNCTION
+
+FUNCTION String.Insert$ (toChange AS STRING, insert AS STRING, position AS INTEGER)
+    toChange = MID$(toChange, 1, position - 1) + insert + MID$(toChange, position, LEN(toChange) - position + 1)
+    String.Insert = toChange
+END FUNCTION
